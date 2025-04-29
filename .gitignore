@@ -1,0 +1,19 @@
+# Ignorar archivo de variables de entorno
+.env
+
+# Ignorar carpeta de credenciales
+/credenciales/
+
+# Ignorar archivos temporales o cachés
+__pycache__/
+*.pyc
+
+# Archivos de Jupyter o logs
+*.ipynb_checkpoints
+*.log
+
+# Archivos procesados (si no deseas subir los CSV movidos)
+processedData/
+data/
+dataReviews/
+

@@ -1,0 +1,17 @@
+Darle nuevamente al usuario la propiedad de la carpeta "Automatizaciones":
+    sudo chown -R $USER:$USER ~/Projects/dotfiles/Automatizaciones
+-------------------
+Darle permisos de lectura y escritura a todos los archivos en esa carpeta:
+    chmod -R u+rw ~/Projects/dotfiles/Automatizaciones
+-------------------
+reiniciar WSL: wsl --shutdown
+-------------------
+Descargar archivo desde windows a carpeta de dataReviews:
+    cp /mnt/c/Users/Diego/Downloads/[Nombre de archivo].csv ~/Projects/dotfiles-personal/Automatizaciones/dataReviews/CSVExport_$(date +"%m_%d_%Y_%H-%M").csv
+-------------------
+Descargar archivo desde windows a carpeta de data:
+    cp /mnt/c/Users/Diego/Downloads/[Nombre de archivo].xlsx ~/Projects/dotfiles-personal/Automatizaciones/data/
+-------------------
+Ejecutar sync-dotfiles.sh desde Visual
+    zsh ./sync-dotfiles.sh
+-------------------
