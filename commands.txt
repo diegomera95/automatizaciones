@@ -15,3 +15,19 @@ Descargar archivo desde windows a carpeta de data:
 Ejecutar sync-dotfiles.sh desde Visual
     zsh ./sync-dotfiles.sh
 -------------------
+Línea para crontab (ejecutarlo todos los días a las 07:30 AM)
+    Primero, abre tu cron personal:
+        crontab -e
+    Y al final del archivo agrega esta línea:
+        30 7 * * * /usr/bin/python3 /home/pautadigital/Projects/dotfiles/Automatizaciones/meta_gastos_mes.py >> /home/pautadigital/cron_logs/meta.log 2>&1
+ Significado:
+
+30 7 * * * → todos los días a las 07:30 AM.
+
+/usr/bin/python3 → ejecutable de Python (confírmame si quieres que te enseñe cómo validar que sea esa ruta en tu máquina).
+
+/home/pautadigital/Projects/dotfiles/Automatizaciones/meta_gastos_mes.py → ruta de tu script.
+
+>> /home/pautadigital/cron_logs/meta.log 2>&1 → guarda toda la salida (normal y errores) en un archivo de log.
+
+-------------------

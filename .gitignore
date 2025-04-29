@@ -13,7 +13,7 @@ __pycache__/
 *.log
 
 # Archivos procesados (si no deseas subir los CSV movidos)
-processedData/
-data/
-dataReviews/
+/processedData/
+/data/
+/dataReviews/
 
