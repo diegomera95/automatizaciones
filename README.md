@@ -21,12 +21,12 @@ META_ACCESS_TOKEN=tu_token_de_meta
 
 1. Clona el repositorio:
 
-git clone git@github.com:diegomera95/pautadigital-automatizaciones.git
-cd pautadigital-automatizaciones
+    git clone git@github.com:diegomera95/automatizaciones.git
+    cd automatizaciones
 
 2. Crea un entorno virtual e instala dependencias:
 
-pip install -r requirements.txt
+    pip install -r requirements.txt
 
 3. Coloca tu archivo .env y las credenciales en la ubicación correcta.
 
