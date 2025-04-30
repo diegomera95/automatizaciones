@@ -31,3 +31,5 @@ Línea para crontab (ejecutarlo todos los días a las 07:30 AM)
 >> /home/pautadigital/cron_logs/meta.log 2>&1 → guarda toda la salida (normal y errores) en un archivo de log.
 
 -------------------
+Copiar archivo en descargas a carpeta automatizaciones
+cp /mnt/c/Users/Diego/Downloads/[Nombre archivo].csv ~/Projects/dotfiles-personal/Automatizaciones/dataReviews/CSVExport_$(date +"%m_%d_%Y_%H-%M").csv
