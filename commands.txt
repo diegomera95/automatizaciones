@@ -35,3 +35,11 @@ Línea para crontab (ejecutarlo todos los días a las 07:30 AM)
 -------------------
 Copiar archivo en descargas a carpeta automatizaciones
 cp /mnt/c/Users/Diego/Downloads/[Nombre archivo].csv ~/Projects/dotfiles-personal/Automatizaciones/dataReviews/CSVExport_$(date +"%m_%d_%Y_%H-%M").csv
+
+-------------------
+Generar token apra API de META 
+    https://www.facebook.com/v19.0/dialog/oauth?
+client_id=1207733130906038
+&redirect_uri=https://localhost:3000/
+&scope=instagram_basic,instagram_manage_insights,pages_show_list,pages_read_engagement,ads_read,read_insights
+&response_type=token
