@@ -48,6 +48,7 @@ rev_mapping = {
     "OT": ["Open Table"],
     "RP": ["Ricardo de Páramo", "Ricardo De Paramo"],
     "WALK-IN": ["Walk In"],
+    "SMS": ["SMS"],
     "WIDGET": ["Booking Widget"]
 }
 
