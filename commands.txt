@@ -11,7 +11,7 @@ Descargar archivo desde windows a carpeta de dataReviews:
     cp "/mnt/c/Users/User/Downloads/[Nombre de archivo].csv" ~/Projects/dotfiles/Automatizaciones/dataReviews/CSVExport_$(date +"%m_%d_%Y_%H-%M").csv
 -------------------
 Descargar archivo desde windows a carpeta de data:
-    cp /mnt/c/Users/Diego/Downloads/[Nombre de archivo].xlsx ~/Projects/dotfiles-personal/Automatizaciones/data/
+    cp "/mnt/c/Users/Diego/Downloads/[Nombre de archivo].xlsx" ~/Projects/dotfiles-personal/Automatizaciones/data/
     cp "/mnt/c/Users/User/Downloads/[Nombre de archivo].xlsx" ~/Projects/dotfiles/Automatizaciones/data/
 -------------------
 Ejecutar sync-dotfiles.sh desde Visual
