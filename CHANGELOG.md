@@ -1,6 +1,6 @@
 # 📘 Changelog
 
-Este documento registra los cambios realizados en el proyecto **Automatizaciones de Pauta Digital**.
+Este documento registra los cambios realizados en el proyecto **Automatizaciones de Pauta Digital en Fusion Agency**.
 
 Todos los cambios significativos seguirán el formato [Keep a Changelog](https://keepachangelog.com/es/1.0.0/) y versionado semántico.
 
