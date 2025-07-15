@@ -43,3 +43,8 @@ client_id=1207733130906038
 &redirect_uri=https://localhost:3000/
 &scope=instagram_basic,instagram_manage_insights,pages_show_list,pages_read_engagement,ads_read,read_insights
 &response_type=token
+
+----------------------
+Ver el IG_USER_ID
+
+https://graph.facebook.com/v19.0/152641954608002?fields=instagram_business_account&access_token=[token extendido]
