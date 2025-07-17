@@ -14,11 +14,12 @@ load_dotenv(dotenv_path=env_path)
 
 ACCESS_TOKEN = os.getenv('META_ACCESS_TOKEN')
 GOOGLE_CREDENTIALS = os.getenv('GOOGLE_SHEETS_CREDENTIALS_PATH')
-SPREADSHEET_ID = os.getenv('FCG_GOOGLE_SHEETS_ID')
+SPREADSHEET_ID = os.getenv('VYVE_GOOGLE_SHEETS_ID')
 SHEET_NAME = "Consumo"
 
 # --- CUENTAS PUBLICITARIAS ---
-CUENTA = {'Francesco': 'act_282927489898717'}
+CUENTAS = {
+    'VYVE': 'act_2306912219555630'}
 
 # --- RANGO DE FECHAS: del 1 al día anterior ---
 hoy = datetime.now()
@@ -43,10 +44,10 @@ params = {
     'limit': 500
 }
 
-# --- PROCESAMIENTO POR CUENTA ---
+# --- CAMPOS DE MÉTRICAS ---
 todos_los_datos = []
 
-for nombre_cuenta, id_cuenta in CUENTA.items():
+for nombre_cuenta, id_cuenta in CUENTAS.items():
     print(f"📊 Procesando cuenta: {nombre_cuenta} ({id_cuenta})")
 
     account = AdAccount(id_cuenta)
@@ -58,50 +59,26 @@ for nombre_cuenta, id_cuenta in CUENTA.items():
             continue
 
         campaign_name = i.get('campaign_name', '')
-
         acciones = i.get('actions', [])
         costos = i.get('cost_per_action_type', [])
         alcance = float(i.get('reach', 0))
 
-        # --- Definir tipo de acción forzada según nombre de campaña ---
-        nombre_lower = campaign_name.lower()
-        tipo_forzado = None
-
-        if "interacción" in nombre_lower:
-            tipo_forzado = "page_engagement"
-        elif "alcance" in nombre_lower:
-            tipo_forzado = "reach"
-        elif "comunidad ig" in nombre_lower or "delivery" in nombre_lower:
-            tipo_forzado = "link_click"
+        # Tipos de resultado priorizados
+        tipos_prioritarios = ['lead', 'offsite_conversion', 'complete_registration']
 
         tipo_resultado = 'N/A'
         valor_resultado = 0
 
-        # Si hay un tipo forzado y está en las acciones, lo usamos
-        if tipo_forzado == "reach":
-            tipo_resultado = "reach"
-            valor_resultado = alcance  # Se toma del campo reach directamente
-
-        elif tipo_forzado:
-            match = next((a for a in acciones if a['action_type'] == tipo_forzado), None)
+        for tipo in tipos_prioritarios:
+            match = next((a for a in acciones if a['action_type'] == tipo), None)
             if match:
-                tipo_resultado = tipo_forzado
+                tipo_resultado = tipo
                 valor_resultado = float(match['value'])
-            else:
-                tipo_resultado = tipo_forzado  # Se mantiene para saber que fue forzado aunque no haya valor
-                valor_resultado = 0
-        else:
-            # Lógica de prioridad estándar
-            tipos_prioritarios = ['landing_page_view', 'link_click', 'lead', 'purchase']
-            for tipo in tipos_prioritarios:
-                match = next((a for a in acciones if a['action_type'] == tipo), None)
-                if match:
-                    tipo_resultado = match['action_type']
-                    valor_resultado = float(match['value'])
-                    break
-            if tipo_resultado == 'N/A' and acciones:
-                tipo_resultado = acciones[0]['action_type']
-                valor_resultado = float(acciones[0]['value'])
+                break
+
+        if tipo_resultado == 'N/A' and acciones:
+            tipo_resultado = acciones[0]['action_type']
+            valor_resultado = float(acciones[0]['value'])
 
         todos_los_datos.append({
             'Fecha Inicio': fecha_inicio,
@@ -111,6 +88,7 @@ for nombre_cuenta, id_cuenta in CUENTA.items():
             'Resultados': valor_resultado,
             'Gasto Total (USD)': gasto
         })
+
 # --- CREAR DATAFRAME Y AGRUPAR CON COSTO POR SULTADOS ---
 df_final = pd.DataFrame(todos_los_datos)
 
@@ -130,7 +108,7 @@ if not df_final.empty:
     df_final = df_final[
         ['Fecha Inicio', 'Fecha Fin', 'Nombre Campaña', 'Tipo de Resultado', 
          'Resultados', 'Gasto Total (USD)', 'Costo por Resultado (USD)']
-         ]
+        ]
 # --- SUBIR A GOOGLE SHEETS ---
 # Limpiar y escribir solo si hay datos
 if not df_final.empty:
