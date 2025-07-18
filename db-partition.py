@@ -11,7 +11,7 @@ env_path = Path(__file__).resolve().parent / '.env'
 load_dotenv(dotenv_path=env_path)
 
 GOOGLE_CREDENTIALS = os.getenv("GOOGLE_SHEETS_CREDENTIALS_PATH")
-SPREADSHEET_ID = "1TgRbf-FE_HeKIG5vVEW0tlljiSQpTN3FVL7JYq6-fJc"
+SPREADSHEET_ID = os.getenv("RAW_DB_FCG_GOOGLE_SHEETS_ID")
 SHEET_NAME = "DB Partition"
 
 # --- PEDIR PARÁMETRO DE PARTICIÓN ---
