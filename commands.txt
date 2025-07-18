@@ -49,8 +49,3 @@ Ver el IG_USER_ID
 
 https://graph.facebook.com/v19.0/152641954608002?fields=instagram_business_account&access_token=[token extendido]
 
-----------------------
-
-FCG_GOOGLE_SHEETS_ID=1egA1yIW7T4MgOs7fCWl9LHx2T3DcYbOp_9eap3YJP_w
-VYV_GOOGLE_SHEETS_ID=1HVu3ajXuUJOAG9m1ngbrQGuXAXiCfKucGeWA-wZS0fg
-VYVE_GOOGLE_SHEETS_ID=1fE1ml52Mz-N8FCL7Dp6IzlyE-N9lruO8e4LNLZI-TYA
