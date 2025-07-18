@@ -13,14 +13,14 @@ env_path = Path(__file__).resolve().parent / '.env'
 load_dotenv(dotenv_path=env_path)
 
 GOOGLE_CREDENTIALS = os.getenv("GOOGLE_SHEETS_CREDENTIALS_PATH")
-SPREADSHEET_URL = "https://docs.google.com/spreadsheets/d/1TgRbf-FE_HeKIG5vVEW0tlljiSQpTN3FVL7JYq6-fJc/edit?usp=sharing"
+SPREADSHEET_ID = os.getenv("RAW_DB_FCG_GOOGLE_SHEETS_ID")
 SHEET_NAME = "Reviews"
 
 # --- CONEXIÓN A GOOGLE SHEETS ---
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
 creds = ServiceAccountCredentials.from_json_keyfile_name(GOOGLE_CREDENTIALS, scope)
 client = gspread.authorize(creds)
-spreadsheet = client.open_by_url(SPREADSHEET_URL)
+spreadsheet = client.open_by_key(SPREADSHEET_ID)
 worksheet = spreadsheet.worksheet(SHEET_NAME)
 
 # --- CARGAR CSV MÁS RECIENTE ---
