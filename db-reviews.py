@@ -33,7 +33,9 @@ print(f"📂 Archivo CSV seleccionado: {latest_csv}")
 df = pd.read_csv(latest_csv, encoding='utf-8')
 
 # --- TRANSFORMAR COLUMNA DE FECHA ---
-df["Review date"] = pd.to_datetime(df["Review date"], format="%b %d, %Y").dt.strftime("%m/%d/%Y")
+df["Review date"] = pd.to_datetime(df["Review date"], format="%b %d, %Y %I:%M %p").dt.strftime("%m/%d/%Y")
+
+#df["Review date"] = pd.to_datetime(df["Review date"], format="%b %d, %Y").dt.strftime("%m/%d/%Y")
 
 # --- FORMATEAR COLUMNAS ---
 df_transformed = df[[ 
