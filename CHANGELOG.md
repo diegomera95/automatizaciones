@@ -35,9 +35,12 @@ Todos los cambios significativos seguirán el formato [Keep a Changelog](https:/
 
 ## [2.1.0] - 2025-08-01
 ### Añadido
-- Funcionalidad para hacer partición de "Otros" en el archivo `db_partition.py`, para que se distribuya al canal de *PAUTA* y *MAILING*.
+- Funcionalidad para hacer partición de **Otros** en el archivo `db_partition.py`, para que se distribuya al canal de **PAUTA** y **MAILING**.
+- Script integrado en el flujo de automatizaciones para mejorar el manejo y segmentación de datos a gran escala.
 - Nuevos requirements
 
 ### Cambiado
-- Ajustes menores en `db_partition.py` para soportar la nueva lógica.
+- Ajustes en `db_partition.py` para soportar la nueva lógica.
+- Optimización menor en el flujo de ejecución para asegurar compatibilidad con el resto de scripts.
+
 
