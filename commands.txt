@@ -17,14 +17,17 @@ Descargar archivo desde windows a carpeta de data:
 Ejecutar sync-dotfiles.sh desde Visual
     zsh ./sync-dotfiles.sh
 -------------------
-Línea para crontab (ejecutarlo todos los días a las 07:30 AM)
+Línea para crontab (ejecutarlo todos los días a las 09:30 AM)
     Primero, abre tu cron personal:
-        crontab -e
+        crontab -e o EDITOR=nano crontab -e
     Y al final del archivo agrega esta línea:
-        30 7 * * * /usr/bin/python3 /home/pautadigital/Projects/dotfiles/Automatizaciones/meta_gastos_mes.py >> /home/pautadigital/cron_logs/meta.log 2>&1
+        30 9 * * * "/home/pautadigital/.pyenv/versions/3.10.13/envs/automatizaciones/bin/python3 /home/pautadigital/Projects/dotfiles/Automatizaciones/V&V_consumo.py" >> /home/pautadigital/cron_logs/VV.log 2>&1
+        31 9 * * * /home/pautadigital/.pyenv/versions/3.10.13/envs/automatizaciones/bin/python3 /home/pautadigital/Projects/dotfiles/Automatizaciones/VYVE_consumo.py >> /home/pautadigital/cron_logs/VYVE.log 2>&1
+        32 9 * * * /home/pautadigital/.pyenv/versions/3.10.13/envs/automatizaciones/bin/python3 /home/pautadigital/Projects/dotfiles/Automatizaciones/FCG_consumo.py >> /home/pautadigital/cron_logs/FCG.log 2>&1
+
  Significado:
 
-30 7 * * * → todos los días a las 07:30 AM.
+30 9 * * * → todos los días a las 09:30 AM.
 
 /usr/bin/python3 → ejecutable de Python (confírmame si quieres que te enseñe cómo validar que sea esa ruta en tu máquina).
 
@@ -32,6 +35,7 @@ Línea para crontab (ejecutarlo todos los días a las 07:30 AM)
 
 >> /home/pautadigital/cron_logs/meta.log 2>&1 → guarda toda la salida (normal y errores) en un archivo de log.
 
+## Esta automatización puede usarse también un wrapper script, en el archivo wrapperScript-implementation.md esta toda la documentación
 -------------------
 Copiar archivo en descargas a carpeta automatizaciones
 cp /mnt/c/Users/Diego/Downloads/[Nombre archivo].csv ~/Projects/dotfiles-personal/Automatizaciones/dataReviews/CSVExport_$(date +"%m_%d_%Y_%H-%M").csv

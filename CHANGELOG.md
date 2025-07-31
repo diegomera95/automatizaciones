@@ -9,11 +9,27 @@ Todos los cambios significativos seguirán el formato [Keep a Changelog](https:/
 ## [v1.0.0] - 2025-04-29
 
 ### Agregado
-- Script `meta_gastos_mes.py` para automatizar gastos diarios desde Meta Ads a Google Sheets.
+- Scripts `meta_gastos_mes.py` para automatizar gastos diarios desde Meta Ads a Google Sheets.
 - Programación automática diaria vía `cron` a las 07:30 AM.
 - Archivos `.env` y `credenciales/` estructurados correctamente con rutas portables.
 - Carga y limpieza de datos desde archivos Excel y CSV.
 - Scripts: `db-reviews.py`, `db-sevenrooms.py`, `db-partition.py` unificados bajo buenas prácticas.
 - Archivo `requirements.txt` con dependencias claras.
 - Documentación inicial con `README.md`.
+
+## [2.0.0] - 2025-07-31
+### Añadido
+- `.env` para configuración y credenciales.
+- Scripts `FCG_consumo.py`, `V&V_consumo.py`, `VYVE_consumo.py` para automatizar gastos diarios desde Meta Ads a Google Sheets.
+- Script `extender_token_ads.py` y generación dinámica de token Meta Ads.
+- Script `run_all.sh` con logs, errores y orquestación secuencial.
+- Carpeta `data`, `dataReviews`, `processedData` para estructuración de datos.
+- Documentación técnica (`wrapperScript-implementation.md`, `automatizaciones-alias.md`).
+
+### Cambiado
+- Migración de rutas y credenciales fuera del código.
+- Integración más robusta con `cron`.
+
+### Eliminado
+- Configuraciones embebidas en código.
 
