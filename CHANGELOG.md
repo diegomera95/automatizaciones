@@ -33,3 +33,11 @@ Todos los cambios significativos seguirán el formato [Keep a Changelog](https:/
 ### Eliminado
 - Configuraciones embebidas en código.
 
+## [2.1.0] - 2025-08-01
+### Añadido
+- Funcionalidad para hacer partición de "Otros" en el archivo `db_partition.py`, para que se distribuya al canal de *PAUTA* y *MAILING*.
+- Nuevos requirements
+
+### Cambiado
+- Ajustes menores en `db_partition.py` para soportar la nueva lógica.
+

@@ -4,3 +4,6 @@ oauth2client
 python-dotenv
 openpyxl
 facebook_business
+shutil
+pathlib
+glob2
