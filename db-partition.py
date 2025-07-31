@@ -5,6 +5,7 @@ import os
 from glob import glob
 from pathlib import Path
 from dotenv import load_dotenv
+import shutil
 
 # --- CONFIGURACIÓN INICIAL ---
 env_path = Path(__file__).resolve().parent / '.env'
@@ -77,13 +78,33 @@ for _, row in rows_to_duplicate.iterrows():
 
 df = pd.concat([df, pd.DataFrame(duplicates)], ignore_index=True)
 
-# --- PARTICIONES ---
+# --- PARTICIONES WALK-IN ---
 df["Partition Covers 15%"] = ""
 df["Partition Covers 85%"] = ""
 mask_walkin = df["REV 2"].isin(["WALK-IN", "WALK-IN 2"])
 df.loc[mask_walkin, "Partition Covers 15%"] = df.loc[mask_walkin, "Booked Covers 2"] * 0.15
 df.loc[mask_walkin, "Partition Covers 85%"] = df.loc[mask_walkin, "Booked Covers 2"] * 0.85
 
+# --- DUPLICAR OTROS ---
+otros_row_duplicate = df[(df["REV 2"] == "OTROS")].copy()
+duplicates_other = []
+for _, row in otros_row_duplicate.iterrows():
+    otros_pauta_row = row.copy()
+    if row["REV 2"] == "OTROS":
+        otros_pauta_row["REV 2"] = "OTROS 2"
+    duplicates_other.append(otros_pauta_row)
+
+df = pd.concat([df, pd.DataFrame(duplicates_other)], ignore_index=True)
+
+# --- PARTICIONES OTROS ---
+df["Partition Others Pauta"] = ""
+df["Partition Others Mailing"] = ""
+mask_otros = df["REV 2"].isin(["OTROS", "OTROS 2"])
+df.loc[mask_otros, "Partition Others Pauta"] = df.loc[mask_otros, "Booked Covers 2"] * 0.5
+df.loc[mask_otros, "Partition Others Mailing"] = df.loc[mask_otros, "Booked Covers 2"] * 0.5
+
+
+# --- OPEN TABLE PARTITION ---
 df["Open Table Partition"] = ""
 mask_ot = (df["Reservation Status"] == "Complete") & (df["REV 2"] == "OT")
 sum_booked = df.loc[mask_ot, "Booked Covers 2"].sum()
@@ -91,7 +112,7 @@ df.loc[mask_ot, "Open Table Partition"] = df.loc[mask_ot, "Booked Covers 2"] - (
     df.loc[mask_ot, "Booked Covers 2"] * (n / sum_booked)
 )
 
-# --- FILA EXTRA PARA PAUTA ---
+# --- FILA EXTRA PARA OT PAUTA ---
 min_date = df.loc[df["REV 2"] == "WALK-IN", "Reservation Date"].min()
 pauta_row = pd.DataFrame([{
     "Venue Name": "Francesco Restaurant",
@@ -103,6 +124,8 @@ pauta_row = pd.DataFrame([{
     "Partition Covers 15%": "",
     "Partition Covers 85%": "",
     "Open Table Partition": n,
+    "Partition Others Pauta": "",
+    "Partition Others Mailing": "",
     "Booked Covers 2": ""
 }])
 
@@ -113,7 +136,8 @@ df = df[[
     "Venue Name", "Reservation Date", "Reservation Status",
     "Detailed Status", "REV 2", "Booked By 2",
     "Partition Covers 15%", "Partition Covers 85%",
-    "Open Table Partition", "Booked Covers 2"
+    "Open Table Partition", "Partition Others Pauta", 
+    "Partition Others Mailing", "Booked Covers 2"
 ]]
 
 # --- SUBIR A GOOGLE SHEETS ---
@@ -130,3 +154,9 @@ except gspread.exceptions.WorksheetNotFound:
 worksheet.append_rows(df.values.tolist(), value_input_option="USER_ENTERED")
 
 print(f"✅ Datos agregados a la hoja '{SHEET_NAME}' sin borrar información anterior.")
+
+# --- MOVER CSV PROCESADO ---
+destination_folder = "processedData"
+os.makedirs(destination_folder, exist_ok=True)
+shutil.move(latest_file, os.path.join(destination_folder, os.path.basename(latest_file)))
+print(f"📦 Archivo procesado movido a '{destination_folder}/'.")
