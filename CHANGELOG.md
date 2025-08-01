@@ -43,4 +43,10 @@ Todos los cambios significativos seguirán el formato [Keep a Changelog](https:/
 - Ajustes en `db_partition.py` para soportar la nueva lógica.
 - Optimización menor en el flujo de ejecución para asegurar compatibilidad con el resto de scripts.
 
+## [2.1.2] - 2025-08-01
+### Cambiado
+- Ajuste en el cálculo del rango de fechas para manejar correctamente el caso cuando el día actual es 1° del mes.
+  - Ahora, si el día actual es 1, el script toma como rango **todo el mes anterior** en lugar de generar un rango inconsistente.
+
+
 
