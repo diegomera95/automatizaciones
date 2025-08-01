@@ -21,10 +21,17 @@ SHEET_NAME = "Consumo"
 CUENTAS = {
     'VYVE': 'act_2306912219555630'}
 
-# --- RANGO DE FECHAS: del 1 al día anterior ---
 hoy = datetime.now()
-fecha_inicio = hoy.replace(day=1).strftime('%Y-%m-%d')
-fecha_fin = (hoy - timedelta(days=1)).strftime('%Y-%m-%d')
+
+if hoy.day == 1:
+    # Mes anterior completo
+    ultimo_mes_anterior = hoy.replace(day=1) - timedelta(days=1)
+    fecha_inicio = ultimo_mes_anterior.replace(day=1).strftime('%Y-%m-%d')
+    fecha_fin = ultimo_mes_anterior.strftime('%Y-%m-%d')
+else:
+    # Mes actual, desde el día 1 hasta ayer
+    fecha_inicio = hoy.replace(day=1).strftime('%Y-%m-%d')
+    fecha_fin = (hoy - timedelta(days=1)).strftime('%Y-%m-%d')
 
 # --- CONEXIÓN META ADS ---
 FacebookAdsApi.init(access_token=ACCESS_TOKEN)
