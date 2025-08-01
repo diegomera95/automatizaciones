@@ -1,16 +1,18 @@
 
-# Automatizaciones de Pauta Digital – Versión 2.0.0
+# Automatizaciones de Pauta Digital – Versión 2.1.0
 
 Este repositorio contiene scripts de automatización para el procesamiento y carga de datos en Google Sheets, integrando fuentes como archivos Excel, CSV y datos de plataformas como **SevenRooms** y **Meta Ads**.
 
-La versión 2.0.0 introduce mejoras en seguridad, logging, orquestación y portabilidad.
+La versión 2.1.0 introduce una nueva funcionalidad clave: **particionado de bases de datos** para optimizar el manejo y segmentación de datos a gran escala, junto con las mejoras previas en seguridad, logging, orquestación y portabilidad.
 
-## Novedades en la versión 2.0.0
-- **Archivo `.env`** para gestionar rutas, credenciales y configuraciones sensibles.
-- **Nuevo script `run_all.sh`** para ejecutar de forma secuencial todas las automatizaciones con logs mejorados y manejo de errores.
-- **Logs por script y log general (`ejecuciones.log`)** con fecha y hora.
-- **Script `extender_token_ads.py`** para ampliar la vigencia del token de Meta Ads.
-- Reorganización del proyecto con carpetas `data`, `dataReviews` y `processedData`.
+## Novedades en la versión 2.1.0
+- **Partición de datos** en `db_partition.py`, integrado en el flujo de automatizaciones.
+- Mantiene todas las mejoras introducidas en la versión 2.0.0:
+  - **Archivo `.env`** para gestionar rutas, credenciales y configuraciones sensibles.
+  - **Nuevo script `run_all.sh`** para ejecutar de forma secuencial todas las automatizaciones con logs mejorados y manejo de errores.
+  - **Logs por script y log general (`ejecuciones.log`)** con fecha y hora.
+  - **Script `extender_token_ads.py`** para ampliar la vigencia del token de Meta Ads.
+  - Reorganización del proyecto con carpetas `data`, `dataReviews` y `processedData`.
 
 ## Requisitos
 
