@@ -2,7 +2,9 @@
 .env
 
 # Ignorar carpeta de credenciales
-/credenciales/
+credentials.json
+/credentials/
+*.json
 
 # Ignorar archivos temporales o cachés
 __pycache__/
