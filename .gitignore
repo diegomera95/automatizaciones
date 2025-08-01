@@ -19,3 +19,6 @@ __pycache__/
 /data/
 /dataReviews/
 
+# Archivos .jar
+*.jar
+
